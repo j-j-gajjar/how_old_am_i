@@ -1,0 +1,18 @@
+name: age_calculator
+description: A Flutter package to calculate someone's age in days, months, and years; in addition it can be used to find the difference between two dates.
+version: 1.0.0
+homepage: https://github.com/JErazo7/age_calculator
+
+environment:
+  sdk: ">=2.19.3 <=3.7.6"
+  flutter: ">=3.7.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
