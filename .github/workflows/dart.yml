@@ -3,31 +3,44 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     name: Build Web
-    env:
-      my_secret: ${{secrets.commit_secret}}
     runs-on: ubuntu-latest
+    env:
+      my_secret: ${{ secrets.commit_secret }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          channel: "stable"
-      - run: flutter pub get
-      - run: flutter create .
-      - run: flutter build web
-      - run: |
-          cd build/web                                
+          node-version: '16'
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Create Flutter project
+        run: flutter create .
+      - name: Build Flutter web
+        run: flutter build web
+      - name: Update base href in index.html
+        run: |
+          cd build/web
           perl -pi -e 's|<base href="/"/>|<base href="https://jaygajjar.ml/how_old_am_i/"/>|' index.html
           perl -pi -e 's|href="|href="https://jaygajjar.ml/how_old_am_i/|' index.html
           perl -pi -e 's|src="|src="https://jaygajjar.ml/how_old_am_i/|' index.html
+      - name: Deploy to GitHub Pages
+        run: |
           git init
           git config --global user.email "gajjarjay52@gmail.com"
           git config --global user.name "j-j-gajjar"
           git status
           git remote -v
-          git config remote.origin.url "https://j-j-gajjar:${{secrets.commit_secret}}@github.com/j-j-gajjar/how_old_am_i.git"
+          git config remote.origin.url "https://j-j-gajjar:${{ secrets.commit_secret }}@github.com/j-j-gajjar/how_old_am_i.git"
           git checkout -b gh-pages
           git add --all
           git commit -m "update"
