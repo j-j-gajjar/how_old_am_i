@@ -1,10 +1,10 @@
 # How Old Am I?
 
-This flutter project allows users to input their birthdate (day, month, year) and calculates their age in years, months, and days. The UI is designed with useMaterial3 and is simple and easy to use. The project is open source and can be used as a template for similar age calculator apps.
+This flutter project allows users to input their birthdate (day, month, year) and calculate their age in years, months, and days. The UI is designed with useMaterial3 and is simple and easy to use. The project is open source and can be used as a template for similar age calculator apps.
 
 # Demo
 
-To see the web app version in action, visit https://jaygajjar.ml/how_old_am_i/.
+To see the web app version in action, visit https://j-j-gajjar.github.io/how_old_am_i/.
 
 # How to Use
 
